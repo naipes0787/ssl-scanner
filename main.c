@@ -1,7 +1,7 @@
 /********************************************
  * TP0 - 2019                               *
- *  T’tulo: Un escaner elemental            *
- *  Nœmero de grupo: 2                      *
+ *  Título: Un escaner elemental            *
+ *  Número de grupo: 2                      *
  *                                          *
  *  Integrantes:                            *
  *      Costa, Leandro (151.787-9)          *
