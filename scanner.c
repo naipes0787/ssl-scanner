@@ -15,11 +15,19 @@ const int tabla[4][5] =
     // El resto de estados no hace falta tenerlos, puesto que nunca se alcanzan.
 };
 
+/**
+* @NAME: detenerse
+* @DESC: Devuelve TRUE si el estado es > 3
+*/
 bool detenerse(int estado)
 {
     return estado > 3;
 }
 
+/**
+* @NAME: intepretar_caracter
+* @DESC: Interpreta la lectura de los caractes y los mapea al tipo caracter
+*/
 enum caracter intepretar_caracter(char c)
 {
     if(isalpha(c))
@@ -34,6 +42,10 @@ enum caracter intepretar_caracter(char c)
     return OTRO;
 }
 
+/**
+* @NAME: es_aceptor
+* @DESC: Devuelve TRUE en caso de estados aceptores (4,5,6)
+*/
 bool es_aceptor(int estado)
 {
     // Los estados aceptores son 4, 5 y 6.
@@ -42,6 +54,10 @@ bool es_aceptor(int estado)
             estado == FDT_RECONOCIDO);
 }
 
+/**
+* @NAME: es_centinela
+* @DESC: Devuelve TRUE en caso de ser centinela (4,5,7)
+*/
 bool es_centinela(int estado)
 {
     // Los identificadores, constantes y errores leen centinelas
@@ -50,6 +66,10 @@ bool es_centinela(int estado)
             estado == ERROR_RECONOCIDO);
 }
 
+/**
+* @NAME: aceptar
+* @DESC: Dependiendo del estado se acepta el token
+*/
 token aceptar(int estado)
 {
     switch(estado) {
