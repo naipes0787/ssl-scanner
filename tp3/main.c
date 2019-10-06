@@ -1,6 +1,6 @@
 /********************************************
  * TP3 - 2019                               *
- *  Título: TP3 - Flex			            *
+ *  Título: TP3 - Flex                      *
  *  Número de grupo: 2                      *
  *                                          *
  *  Integrantes:                            *
