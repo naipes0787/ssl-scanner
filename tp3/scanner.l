@@ -9,7 +9,7 @@
 %option nounput
 
 Letra                                                   [[:alpha:]]
-Digito                                                  [0-9]
+Digito                                                  [[:digit:]]
 LetraDigito                                             [[:alnum:]]
 Blanco                                                  [[:space:]]
 Comentario                                              #.*
@@ -35,7 +35,7 @@ escribir                                                return ESCRIBIR;
 \*                                                      return '*';
 \/                                                      return '/';
 \<=                                                     return ASIGNACION;
-{Blanco}+                                               |
+{Blanco}*                                            	|
 {Comentario}						;
 {Letra}{LetraDigito}*{Otros}({LetraDigito}|{Otros})*    printf("Error léxico: identificador inválido: %s\n", yytext);
 {Digito}+{Letra}+{LetraDigito}*                         printf("Error léxico: constante inválida: %s\n", yytext);
