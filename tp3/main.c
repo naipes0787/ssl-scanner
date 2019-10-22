@@ -20,7 +20,7 @@
 
 int main() {
 	// Los demás son de un único caracter, por lo que mostramos el caracter directamente
-	const char* keywords[] = { "Fin de Archivo", "Programa", "Fin", "Variables", "Código", 
+	const char* keywords[] = { "Fin de Archivo", "Programa", "Fin", "Código", 
 		"Definir", "Leer", "Escribir", "Identificador", "Asignación", "Constante" };
 
 	TOKEN token;

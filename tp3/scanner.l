@@ -13,13 +13,12 @@ Digito                                                  [[:digit:]]
 LetraDigito                                             [[:alnum:]]
 Blanco                                                  [[:space:]]
 Comentario                                              #.*
-Otros                                                   [^[:space:]();,+\-*/]
+Otros  						[[:punct:]]{-}[();,+\-*/]
 
 %%
 
 programa                                                return PROGRAMA;
 fin                                                     return FIN;
-variables                                               return VARIABLES;
 codigo                                                  return CODIGO;
 definir                                                 return DEFINIR;
 leer                                                    return LEER;

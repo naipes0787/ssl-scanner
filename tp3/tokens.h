@@ -5,7 +5,6 @@ typedef enum {
 	FDT,
 	PROGRAMA,
 	FIN,
-	VARIABLES,
 	CODIGO,
 	DEFINIR,
 	LEER,
