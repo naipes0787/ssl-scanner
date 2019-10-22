@@ -43,8 +43,8 @@ sentencia 				: LEER '('listaIdentificadores')' ';' 	{printf("leer\n");}
 listaIdentificadores 	: listaIdentificadores',' IDENTIFICADOR
                         | IDENTIFICADOR
 						;
-listaExpresiones 		: expresion
-                        | expresion',' listaExpresiones
+listaExpresiones 		: listaExpresiones',' expresion
+                        | expresion
 						;
 expresion 				: operando
                         | '-'operando %prec NEG	 	{printf("inversion\n");}
