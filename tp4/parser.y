@@ -14,7 +14,7 @@ extern int yynerrs;
 %output "parser.c"
 %define parse.error verbose
 
-%token PROGRAMA FIN CODIGO DEFINIR LEER ESCRIBIR CONSTANTE IDENTIFICADOR
+%token PROGRAMA FIN CODIGO DEFINIR LEER ESCRIBIR IDENTIFICADOR CONSTANTE
 %token ASIGNACION "<="
 
 %left  '-'  '+'
@@ -23,41 +23,40 @@ extern int yynerrs;
 
 %%
 
-programa 				: PROGRAMA listaDeclaraciones codigo FIN {if (yylexerrs || yynerrs) YYABORT;}
-listaDeclaraciones 		: listaDeclaraciones variable
-						| variable
-						;
-variable 				: DEFINIR IDENTIFICADOR';'	{printf("definir %s\n",$IDENTIFICADOR);}
-						| DEFINIR error';'
-						;
-codigo 					: CODIGO listaSentencias
-						;
-listaSentencias : 		listaSentencias sentencia
+programa                : PROGRAMA listaDeclaraciones codigo FIN {if (yylexerrs || yynerrs) YYABORT;}
+listaDeclaraciones      : listaDeclaraciones variable
+                        | variable
+                        ;
+variable                : DEFINIR IDENTIFICADOR';'    {printf("definir %s\n", $IDENTIFICADOR);}
+                        | error';'
+                        ;
+codigo                  : CODIGO listaSentencias
+                        ;
+listaSentencias         : listaSentencias sentencia
                         | sentencia
-						;
-sentencia 				: LEER '('listaIdentificadores')' ';' 	{printf("leer\n");}
-                        | ESCRIBIR '('listaExpresiones')' ';' 	{printf("escribir\n");}
-                        | IDENTIFICADOR "<=" expresion ';'		{printf("asignacion\n");}
-						| error';'
-						;
-listaIdentificadores 	: listaIdentificadores',' IDENTIFICADOR
+                        ;
+sentencia               : LEER '('listaIdentificadores')' ';'     {printf("leer\n");}
+                        | ESCRIBIR '('listaExpresiones')' ';'     {printf("escribir\n");}
+                        | IDENTIFICADOR "<=" expresion ';'        {printf("asignación\n");}
+                        | error';'
+                        ;
+listaIdentificadores    : listaIdentificadores',' IDENTIFICADOR
                         | IDENTIFICADOR
-						;
-listaExpresiones 		: listaExpresiones',' expresion
+                        ;
+listaExpresiones        : listaExpresiones',' expresion
                         | expresion
-						;
-expresion 				: operando
-                        | '-'operando %prec NEG	 	{printf("inversion\n");}
-                        | '('expresion')' 	  		{printf("paréntesis\n");}
-                        | expresion '+' expresion	{printf("suma\n");}
-                        | expresion '-' expresion 	{printf("resta\n");}
-                        | expresion '*' expresion 	{printf("multiplicacion\n");}
-                        | expresion '/' expresion 	{printf("division\n");}
-						| '(' error ')'
-						;
-operando				: IDENTIFICADOR
+                        ;
+expresion               : operando
+                        | '-'operando %prec NEG         {printf("inversión\n");}
+                        | '('expresion')'               {printf("paréntesis\n");}
+                        | expresion '+' expresion    {printf("suma\n");}
+                        | expresion '-' expresion     {printf("resta\n");}
+                        | expresion '*' expresion     {printf("multiplicación\n");}
+                        | expresion '/' expresion     {printf("división\n");}
+                        ;
+operando                : IDENTIFICADOR
                         | CONSTANTE
-						;
+                        ;
 %%
 
 /* Informa la ocurrencia de un error. */
