@@ -17,7 +17,7 @@ Digito                                                  [[:digit:]]
 LetraDigito                                             [[:alnum:]]
 Blanco                                                  [[:space:]]
 Comentario                                              #.*
-Otros  						[[:punct:]]{-}[();,+\-*/]
+Otros  													[[:punct:]]{-}[();,+*/#=>-]
 
 %%
 
@@ -50,7 +50,8 @@ escribir                                                return ESCRIBIR;
 								yyerror(msg);
 								yylexerrs++;
 							}
-{Otros}+                                                {
+{Otros}+                    							|
+.                                                       {
 								sprintf(msg, "Error léxico: cadena desconocida: %s", yytext);
 								yyerror(msg);
 								yylexerrs++;
