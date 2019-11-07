@@ -17,7 +17,7 @@ Digito                                                  [[:digit:]]
 LetraDigito                                             [[:alnum:]]
 Blanco                                                  [[:space:]]
 Comentario                                              #.*
-Otros  													[[:punct:]]{-}[();,+*/#=>-]
+Otros                                                   [[:punct:]]{-}[();,+*/#=>-]
 
 %%
 
