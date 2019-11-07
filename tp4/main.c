@@ -16,7 +16,6 @@
 
 #include <stdio.h>
 #include "parser.h"
-#include "scanner.h"
 
 int main() {
 	switch(yyparse()){
