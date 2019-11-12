@@ -7,6 +7,7 @@ int temporales;
 const int id_max = 20;
 
 void declarar(char *id){
+	agregar(id);
 	printf("Declare %s,Integer\n", id);
 }
 

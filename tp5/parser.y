@@ -4,7 +4,12 @@
 #include "symbol.h"
 #include "semantic.h"
 
+
+void error_undeclared(const char *s); // Para mostrar error semantico por variable no declarada
+
 int semanticerrs = 0;
+
+char msg[120]; //para poder armar mensajes a enviar a yyerror
 }
 
 %code provides {
@@ -31,7 +36,8 @@ programa                : PROGRAMA {iniciar();} listaDeclaraciones codigo FIN {d
 listaDeclaraciones      : listaDeclaraciones variable
                         | variable
                         ;
-variable                : DEFINIR IDENTIFICADOR';'    {printf("definir %s\n", $IDENTIFICADOR);}
+variable                : DEFINIR IDENTIFICADOR';'    {if(!existe($3)) declarar($3);
+                                                       else{sprintf(msg, "Error semántico: identificador %s ya declarado", $3);yyerror(msg);semanticerrs++;YYERROR;}}
                         | error';'
                         ;
 codigo                  : CODIGO listaSentencias
@@ -41,14 +47,14 @@ listaSentencias         : listaSentencias sentencia
                         ;
 sentencia               : LEER '('listaIdentificadores')' ';'
                         | ESCRIBIR '('listaExpresiones')' ';'
-                        | IDENTIFICADOR "<=" expresion ';'        {guardar($3,$1);}
+                        | IDENTIFICADOR "<=" expresion ';'        {if(!existe($1)){error_undeclared($1);YYERROR;} else guardar($3,$1);}
                         | error';'
                         ;
-listaIdentificadores    : listaIdentificadores',' IDENTIFICADOR {leer($1);}
-                        | IDENTIFICADOR                         {leer($1);};
+listaIdentificadores    : listaIdentificadores',' IDENTIFICADOR {if(!existe($1)){error_undeclared($1);YYERROR;} else leer($1);}
+                        | IDENTIFICADOR                         {if(!existe($1)){error_undeclared($1);YYERROR;} else leer($1);}
                         ;
 listaExpresiones        : listaExpresiones',' expresion {escribir($1);}
-                        | expresion                     {escribir($1);};
+                        | expresion                     {escribir($1);}
                         ;
 expresion               : operando                      {$$=$1;}
                         | '-'operando %prec NEG         {$$ = invertir($2);}
@@ -58,7 +64,7 @@ expresion               : operando                      {$$=$1;}
                         | expresion '*' expresion       {$$ = multiplicar($1, $3);}
                         | expresion '/' expresion       {$$ = dividir($1, $3);}
                         ;
-operando                : IDENTIFICADOR
+operando                : IDENTIFICADOR         {if(!existe($1)){error_undeclared($1);YYERROR;}}
                         | CONSTANTE
                         ;
 %%
@@ -67,4 +73,10 @@ operando                : IDENTIFICADOR
 void yyerror(const char *s){
         printf("línea #%d  %s\n", yylineno, s);
         return;
+}
+
+void error_undeclared(const char *s) {
+    sprintf(msg, "Error semántico: identificador %s NO declarado", s);
+    yyerror(msg);
+    semanticerrs++;                             
 }

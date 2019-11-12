@@ -22,11 +22,11 @@ int main() {
 	switch(yyparse()){
 	case 0:
 		puts("Compilacion terminada con exito"); 
-		printf("Errores sintácticos: %d - Errores léxicos: %d - Errores semanticos: %d\n", yynerrs, yylexerrs, semanticerrs);
+		printf("Errores sintácticos: %d - Errores léxicos: %d - Errores semánticos: %d\n", yynerrs, yylexerrs, semanticerrs);
 		return 0;
 	case 1:
 		puts("Errores de compilación");
-		printf("Errores sintácticos: %d - Errores léxicos: %d - Errores semanticos: %d\n", yynerrs, yylexerrs, semanticerrs);
+		printf("Errores sintácticos: %d - Errores léxicos: %d - Errores semánticos: %d\n", yynerrs, yylexerrs, semanticerrs);
 		return 1;
 	case 2:
 		puts("Memoria insuficiente"); 
