@@ -2,22 +2,19 @@
 #include <stdio.h>
 #include <string.h>
 
-struct tablaSimbolos {
+struct {
 	char *buffer[200];
 	int indice;
-}diccionario  =  {.indice = 0};
+} diccionario  =  { .indice = 0 };
 
-void agregar(char *variable ){
-  diccionario.buffer[diccionario.indice]=variable;
-  diccionario.indice++;
+void agregar(char *variable ) {
+    diccionario.buffer[diccionario.indice++] = variable;
 }
 
-int existe(char *variable){
+int existe(char *variable) {
+    for(int i = 0; i < diccionario.indice; i++)
+        if(strcmp(diccionario.buffer[i], variable) == 0)
+        return 1;
 
-  for(int i=0; i<diccionario.indice; i++){
-
-    if(strcmp(diccionario.buffer[i], variable) == 0 )
-      return 1;
-  }
-  return 0;
+    return 0;
 }

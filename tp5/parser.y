@@ -56,7 +56,7 @@ listaIdentificadores    : listaIdentificadores',' IDENTIFICADOR {if(!existe($1))
 listaExpresiones        : listaExpresiones',' expresion {escribir($1);}
                         | expresion                     {escribir($1);}
                         ;
-expresion               : operando                      {$$=$1;}
+expresion               : operando                      {$$ = $1;}
                         | '-'operando %prec NEG         {$$ = invertir($2);}
                         | '('expresion')'               {$$ = $2;}
                         | expresion '+' expresion       {$$ = sumar($1, $3);}
