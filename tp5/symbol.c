@@ -1,5 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 
 struct {
@@ -7,14 +5,14 @@ struct {
 	int indice;
 } diccionario  =  { .indice = 0 };
 
-void agregar(char *variable ) {
+void agregar(char *variable) {
     diccionario.buffer[diccionario.indice++] = variable;
 }
 
 int existe(char *variable) {
     for(int i = 0; i < diccionario.indice; i++)
         if(strcmp(diccionario.buffer[i], variable) == 0)
-        return 1;
+            return 1;
 
     return 0;
 }

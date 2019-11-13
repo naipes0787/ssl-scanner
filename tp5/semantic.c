@@ -1,64 +1,62 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include "symbol.h"
 
 #define ID_MAX_LENGTH 10
 
-int temporales = 1;
-
-void declarar(char *id){
+void declarar(char *id) {
 	agregar(id);
 	printf("Declare %s,Integer\n", id);
 }
 
-char* get_temp(){
+char* get_temp(void) {
+	static int temporales = 1;
 	char *temp = malloc(ID_MAX_LENGTH);
 	sprintf(temp, "Temp#%d", temporales++);
 	declarar(temp);
 	return temp;
 }
 
-void leer(char *id){
+void leer(char *id) {
 	printf("Read %s,Integer\n", id);
 }
-void escribir(char *id){
-	printf("Write %s,Integer\n", id);
+void escribir(char *expr) {
+	printf("Write %s,Integer\n", expr);
 }
-char* invertir(char *idEntrada){
-  	char *idSalida = get_temp();
-	printf("NEG %s,,%s\n", idEntrada, idSalida);
-	return idSalida;
+char* invertir(char *operando) {
+  	char *var = get_temp();
+	printf("NEG %s,,%s\n", operando, var);
+	return var;
 }
-char* multiplicar(char *idEntrada1, char *idEntrada2){
-	char *idSalida = get_temp();
-	printf("MUL %s,%s,%s\n", idEntrada1, idEntrada2, idSalida);
-	return idSalida;
+char* multiplicar(char *operando1, char *operando2) {
+	char *var = get_temp();
+	printf("MUL %s,%s,%s\n", operando1, operando2, var);
+	return var;
 }
-char* sumar(char *idEntrada1, char *idEntrada2){
-	char *idSalida = get_temp();
-	printf("ADD %s,%s,%s\n", idEntrada1, idEntrada2, idSalida);
-	return idSalida;
+char* sumar(char *operando1, char *operando2) {
+	char *var = get_temp();
+	printf("ADD %s,%s,%s\n", operando1, operando2, var);
+	return var;
 }
-char* restar(char *idEntrada1, char *idEntrada2){
-	char *idSalida = get_temp();
-	printf("SUB %s,%s,%s\n", idEntrada1, idEntrada2, idSalida);
-	return idSalida;
-}
-
-char* dividir(char *idEntrada1, char *idEntrada2){
-	char *idSalida = get_temp();
-	printf("DIV %s,%s,%s\n", idEntrada1, idEntrada2, idSalida);
-	return idSalida;
+char* restar(char *operando1, char *operando2) {
+	char *var = get_temp();
+	printf("SUB %s,%s,%s\n", operando1, operando2, var);
+	return var;
 }
 
-void guardar(char *idEntrada, char *idSalida){
-	printf("Store %s, %s \n", idEntrada, idSalida);
+char* dividir(char *operando1, char *operando2) {
+	char *var = get_temp();
+	printf("DIV %s,%s,%s\n", operando1, operando2, var);
+	return var;
 }
 
-void iniciar(){
+void asignar(char *var1, char *var2) {
+	printf("Store %s, %s \n", var1, var2);
+}
+
+void inicio(void) {
 	printf("Load rtlib,\n");
 }
-void detener(){
+void fin(void) {
 	printf("Exit ,\n");
 }

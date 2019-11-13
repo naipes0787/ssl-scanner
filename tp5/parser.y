@@ -32,7 +32,7 @@ extern int yynerrs;
 
 %%
 
-programa                : PROGRAMA {iniciar();} listaDeclaraciones codigo FIN {detener(); if (yylexerrs || yynerrs || semanticerrs ) YYABORT;}
+programa                : PROGRAMA {inicio();} listaDeclaraciones codigo FIN {fin(); if (yylexerrs || yynerrs || semanticerrs ) YYABORT;}
 listaDeclaraciones      : listaDeclaraciones variable
                         | variable
                         ;
@@ -47,7 +47,7 @@ listaSentencias         : listaSentencias sentencia
                         ;
 sentencia               : LEER '('listaIdentificadores')' ';'
                         | ESCRIBIR '('listaExpresiones')' ';'
-                        | IDENTIFICADOR "<=" expresion ';'        {if(!existe($1)){error_undeclared($1);YYERROR;} else guardar($3,$1);}
+                        | IDENTIFICADOR "<=" expresion ';'        {if(!existe($1)){error_undeclared($1);YYERROR;} else asignar($3,$1);}
                         | error';'
                         ;
 listaIdentificadores    : listaIdentificadores',' IDENTIFICADOR {if(!existe($1)){error_undeclared($1);YYERROR;} else leer($1);}
