@@ -57,7 +57,7 @@ listaExpresiones        : listaExpresiones',' expresion {escribir($1);}
                         | expresion                     {escribir($1);}
                         ;
 expresion               : operando                      {$$ = $1;}
-                        | '-'operando %prec NEG         {$$ = invertir($2);}
+                        | '-'operando %prec NEG         {$$ = negar($2);}
                         | '('expresion')'               {$$ = $2;}
                         | expresion '+' expresion       {$$ = sumar($1, $3);}
                         | expresion '-' expresion       {$$ = restar($1, $3);}
@@ -71,7 +71,7 @@ operando                : IDENTIFICADOR         {if(!existe($1)){error_undeclare
 
 /* Informa la ocurrencia de un error. */
 void yyerror(const char *s){
-        printf("línea #%d  %s\n", yylineno, s);
+        printf("línea #%d: %s\n", yylineno, s);
         return;
 }
 

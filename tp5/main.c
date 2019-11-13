@@ -21,7 +21,7 @@ extern int semanticerrs;
 int main() {
 	switch(yyparse()){
 	case 0:
-		puts("Compilacion terminada con exito"); 
+		puts("Compilación terminada con éxito"); 
 		printf("Errores sintácticos: %d - Errores léxicos: %d - Errores semánticos: %d\n", yynerrs, yylexerrs, semanticerrs);
 		return 0;
 	case 1:
