@@ -50,7 +50,7 @@ sentencia               : LEER '('listaIdentificadores')' ';'
                         | IDENTIFICADOR "<=" expresion ';'        {if(!existe($1)){error_undeclared($1);YYERROR;} else asignar($3,$1);}
                         | error';'
                         ;
-listaIdentificadores    : listaIdentificadores',' IDENTIFICADOR {if(!existe($1)){error_undeclared($1);YYERROR;} else leer($3);}
+listaIdentificadores    : listaIdentificadores',' IDENTIFICADOR {if(!existe($3)){error_undeclared($3);YYERROR;} else leer($3);}
                         | IDENTIFICADOR                         {if(!existe($1)){error_undeclared($1);YYERROR;} else leer($1);}
                         ;
 listaExpresiones        : listaExpresiones',' expresion {escribir($3);}
